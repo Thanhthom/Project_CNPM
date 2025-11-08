@@ -20,7 +20,7 @@ export interface Movie {
   rating: number
   posterUrl: string
   trailerUrl: string
-  status: "playing" | "upcoming"
+  status: "playing" | "upcoming" | "special"
   releaseDate: string // ISO
   price?: number // Added price field
 }

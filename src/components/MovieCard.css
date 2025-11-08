@@ -161,3 +161,82 @@
 .book-button:hover {
   background-color: #357abd;
 }
+
+/* Trailer modal styles */
+.trailer-modal {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0,0,0,0.7);
+  z-index: 2000;
+  padding: 1rem;
+}
+
+.trailer-modal-content {
+  width: min(900px, 95%);
+  background: #0b1220;
+  border-radius: 8px;
+  padding: 0.5rem;
+  position: relative;
+}
+
+.trailer-close {
+  position: absolute;
+  right: 8px;
+  top: 8px;
+  background: transparent;
+  border: none;
+  color: #fff;
+  font-size: 1.5rem;
+  cursor: pointer;
+}
+
+.trailer-embed {
+  aspect-ratio: 16/9;
+  width: 100%;
+}
+
+.trailer-embed iframe {
+  width: 100%;
+  height: 100%;
+  border: 0;
+  border-radius: 6px;
+}
+
+.trailer-placeholder {
+  padding: 2rem;
+  color: #cbd5e1;
+  text-align: center;
+}
+
+/* Login prompt modal */
+.login-prompt-modal {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0,0,0,0.6);
+  z-index: 3000;
+}
+
+.login-prompt-content {
+  background: #0b1220;
+  color: #e6eef8;
+  padding: 20px;
+  border-radius: 8px;
+  width: 360px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.6);
+  text-align: left;
+}
+
+.login-prompt-content h3 {
+  margin: 0 0 8px 0;
+}
+
+.login-prompt-content p {
+  margin: 0 0 12px 0;
+  color: #cbd5e1;
+}
