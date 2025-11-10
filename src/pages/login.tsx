@@ -4,8 +4,9 @@ import type React from "react"
 import { useState } from "react"
 import { useNavigate } from "react-router-dom"
 import { useAuth } from "../context/useAuth"
-import Header from "../components/Header"
+// import Header from "../components/Header"
 import Footer from "../components/Footer"
+import "./login.css"
 
 const Login = () => {
   const [email, setEmail] = useState("")
@@ -37,144 +38,63 @@ const Login = () => {
   }
 
   return (
-    <div
-      style={{
-        backgroundColor: "#0f172a",
-        minHeight: "100vh",
-        color: "white",
-        display: "flex",
-        flexDirection: "column",
-      }}
-    >
-      <Header />
-      <main style={{ flex: 1, display: "flex", alignItems: "center", justifyContent: "center", padding: "48px 16px" }}>
-        <div
-          style={{
-            backgroundColor: "#1e293b",
-            borderRadius: "8px",
-            boxShadow: "0 20px 25px -5px rgba(0, 0, 0, 0.1)",
-            padding: "32px",
-            width: "100%",
-            maxWidth: "448px",
-          }}
-        >
-          <h2 style={{ fontSize: "30px", fontWeight: "bold", marginBottom: "32px", textAlign: "center" }}>
-            {isSignup ? "Sign Up" : "Login"}
-          </h2>
+    <div className="login-page">
+      {/* <Header /> */}
+      <main className="login-container">
+        <button className="back-home-btn" onClick={() => navigate("/")} title="Quay lại trang chủ">
+          ← Quay lại trang chủ
+        </button>
+        <div className="login-card">
+          <h2>{isSignup ? "📝 Sign Up" : "🔐 Login"}</h2>
 
-          {error && (
-            <div
-              style={{
-                backgroundColor: "#7f1d1d",
-                color: "#fca5a5",
-                padding: "12px",
-                borderRadius: "6px",
-                marginBottom: "16px",
-              }}
-            >
-              {error}
-            </div>
-          )}
+          {error && <div className="error-message">{error}</div>}
 
-          <form onSubmit={handleSubmit} style={{ display: "flex", flexDirection: "column", gap: "24px" }}>
+          <form onSubmit={handleSubmit} className="login-form">
             {isSignup && (
-              <div>
-                <label style={{ display: "block", fontSize: "14px", fontWeight: "600", marginBottom: "8px" }}>
-                  Full Name
-                </label>
+              <div className="form-group">
+                <label>Full Name</label>
                 <input
                   type="text"
                   value={name}
                   onChange={(e) => setName(e.target.value)}
-                  required
-                  style={{
-                    width: "100%",
-                    padding: "8px 16px",
-                    backgroundColor: "#334155",
-                    border: "1px solid #475569",
-                    borderRadius: "8px",
-                    color: "white",
-                  }}
-                  placeholder="Enter your name"
+                  required={isSignup}
+                  placeholder="Enter your full name"
                 />
               </div>
             )}
 
-            <div>
-              <label style={{ display: "block", fontSize: "14px", fontWeight: "600", marginBottom: "8px" }}>
-                Email
-              </label>
+            <div className="form-group">
+              <label>Email Address</label>
               <input
                 type="email"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 required
-                style={{
-                  width: "100%",
-                  padding: "8px 16px",
-                  backgroundColor: "#334155",
-                  border: "1px solid #475569",
-                  borderRadius: "8px",
-                  color: "white",
-                }}
-                placeholder="Enter your email"
+                placeholder="you@example.com"
               />
             </div>
 
-            <div>
-              <label style={{ display: "block", fontSize: "14px", fontWeight: "600", marginBottom: "8px" }}>
-                Password
-              </label>
+            <div className="form-group">
+              <label>Password</label>
               <input
                 type="password"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
                 required
-                style={{
-                  width: "100%",
-                  padding: "8px 16px",
-                  backgroundColor: "#334155",
-                  border: "1px solid #475569",
-                  borderRadius: "8px",
-                  color: "white",
-                }}
-                placeholder="Enter your password"
+                placeholder="••••••••"
               />
             </div>
 
-            <button
-              type="submit"
-              disabled={isLoading}
-              style={{
-                width: "100%",
-                backgroundColor: "#2563eb",
-                color: "white",
-                fontWeight: "600",
-                padding: "12px",
-                borderRadius: "8px",
-                border: "none",
-                cursor: isLoading ? "not-allowed" : "pointer",
-                opacity: isLoading ? 0.6 : 1,
-              }}
-            >
-              {isLoading ? "Loading..." : isSignup ? "Sign Up" : "Login"}
+            <button type="submit" className="submit-btn" disabled={isLoading}>
+              {isLoading ? "⏳ Processing..." : isSignup ? "✓ Sign Up" : "✓ Login"}
             </button>
           </form>
 
-          <div style={{ marginTop: "24px", textAlign: "center" }}>
-            <p style={{ color: "#9ca3af" }}>
+          <div className="toggle-section">
+            <p>
               {isSignup ? "Already have an account?" : "Don't have an account?"}{" "}
-              <button
-                onClick={() => setIsSignup(!isSignup)}
-                style={{
-                  color: "#60a5fa",
-                  fontWeight: "600",
-                  background: "none",
-                  border: "none",
-                  cursor: "pointer",
-                }}
-              >
-                {isSignup ? "Login" : "Sign Up"}
+              <button className="toggle-btn" onClick={() => setIsSignup(!isSignup)} type="button">
+                {isSignup ? "Login here" : "Sign Up here"}
               </button>
             </p>
           </div>

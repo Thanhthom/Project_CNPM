@@ -1,55 +1,67 @@
+/* phần trắng phía trên header
+.header-top-space {
+  background-color: white;
+  height: 10px;
+  width: 100%;
+} */
+
 .header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  background-color: #0f1b45;
+  background-color: #0e365f;
   color: white;
   padding: 15px 40px;
-  position: sticky;
-  top: 0;
-  z-index: 100;
+  z-index: 999;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+  margin: 0;
 }
 
 .logo {
   font-size: 28px;
   font-weight: 700;
   color: #ffffff;
+  text-decoration: none;
 }
 
+/* NAV */
 .nav {
   display: flex;
   gap: 25px;
 }
 
 .nav a {
-    color: #ffffff;                
-    text-decoration: none;
-    padding: 6px 14px;       /* tăng padding để chữ to hơn vẫn cân đối */
-    border: 2px solid transparent; 
-    border-radius: 6px;
-    display: inline-block;
-    transition: all 0.2s ease;
-    background-color: transparent;  
-    font-size: 16px;          /* chữ to hơn */
-    font-weight: 600;         /* chữ đậm hơn */
+  color: #ffffff;
+  text-decoration: none;
+  padding: 6px 14px;
+  border: 2px solid transparent;
+  border-radius: 6px;
+  transition: all 0.25s ease;
+  font-size: 16px;
+  font-weight: 600;
 }
 
+/* khi click (active) */
 .nav a.active {
-    color: #007bff;                /* chữ xanh khi active */
-    border-color: #ffffff;          /* viền trắng */
-    background-color: #ffffff;      /* nền trắng */
+  color: #003d7a;
+  background-color: #ffffff;
+  border-color: #ffffff;
 }
 
-
+/* hover khi chưa click */
 .nav a:hover {
-  /* color: #ffffff; */
   border-bottom: 2px solid #ffffff;
 }
 
+/* Ô tìm kiếm */
 .search-form {
   display: flex;
   align-items: center;
-  background-color: #1a2f5a;
+  background-color: rgba(255, 255, 255, 0.1);
   border-radius: 25px;
   overflow: hidden;
   height: 36px;
@@ -73,6 +85,7 @@
   font-size: 18px;
 }
 
+/* Auth buttons */
 .auth-buttons {
   display: flex;
   gap: 10px;
@@ -80,7 +93,7 @@
 
 .login-btn,
 .signup-btn {
-  border: 1px solid white;
+  /* border: 1px solid white; */
   background: transparent;
   color: white;
   padding: 6px 14px;
@@ -88,10 +101,11 @@
   cursor: pointer;
   font-size: 14px;
   transition: 0.3s;
+  text-decoration: none;
 }
 
 .login-btn:hover,
 .signup-btn:hover {
   background: white;
-  color: #0f1b45;
+  color: #003d7a;
 }

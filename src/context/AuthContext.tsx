@@ -22,14 +22,21 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
       try {
         const userData = await authAPI.me()
         setUser(userData)
-      } catch {
+      } catch (err) {
+        console.error("Auth check failed:", err)
         setUser(null)
+        localStorage.removeItem("authToken")
       } finally {
         setIsLoading(false)
       }
     }
 
-    checkAuth()
+    // Only check auth if token exists
+    if (localStorage.getItem("authToken")) {
+      checkAuth()
+    } else {
+      setIsLoading(false)
+    }
   }, [])
 
   const login = async (email: string, password: string) => {

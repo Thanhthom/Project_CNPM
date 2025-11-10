@@ -1,0 +1,92 @@
+/* Styles adapted from home.css for Booking page */
+.booking-page {
+  background-color: #0f172a;
+  min-height: 100vh;
+  color: white;
+}
+
+.booking-container {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 48px 16px;
+}
+
+.booking-section {
+  margin-bottom: 64px;
+}
+
+.section-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 32px;
+  padding: 0 1rem;
+}
+
+.section-header h2 {
+  font-size: 24px;
+  font-weight: bold;
+  color: white;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.view-all {
+  background-color: transparent;
+  color: #4a90e2;
+  border: 2px solid #4a90e2;
+  padding: 8px 24px;
+  border-radius: 4px;
+  font-weight: 600;
+  font-size: 0.9rem;
+  transition: all 0.2s;
+}
+
+.view-all:hover {
+  background-color: #4a90e2;
+  color: white;
+}
+
+.loading {
+  text-align: center;
+  padding: 48px;
+  font-size: 1.2rem;
+  color: #94a3b8;
+}
+
+.text-title {
+  border: 3px solid #0d2f6d;
+  padding: 6px 14px;
+  border-radius: 8px;
+  background-color: #0d2f6d;
+  color: white;
+  font-size: 18px;
+  font-weight: 600;
+}
+
+@media (max-width: 1200px) {
+  .booking-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (max-width: 900px) {
+  .booking-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 600px) {
+  .booking-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .section-header {
+    flex-direction: column;
+    gap: 1rem;
+  }
+  
+  .booking-container {
+    padding: 24px 12px;
+  }
+}

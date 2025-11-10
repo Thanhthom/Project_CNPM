@@ -15,7 +15,7 @@ const HeroBanner = () => {
   useEffect(() => {
     const loadHero = async () => {
       try {
-        const movies = await moviesAPI.list(1, 6)
+        const movies = await moviesAPI.nowShowing()
         // prefer a 'playing' movie, otherwise first
         const firstPlaying = movies.find((m) => m.status === "playing") || movies[0] || null
         setHero(firstPlaying)

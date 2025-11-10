@@ -72,6 +72,7 @@ import HeroBanner from "../components/HeroBanner"
 import MovieList from "../components/MovieList"
 import Footer from "../components/Footer"
 import type { Movie } from "../types"
+import { moviesAPI } from "../services/api"
 import "./home.css"
 
 const Home = () => {
@@ -79,45 +80,55 @@ const Home = () => {
   const [movies, setMovies] = useState<Movie[]>([])
 
   useEffect(() => {
-    // Giả lập dữ liệu phim để test giao diện
-    const mockMovies: Movie[] = [
-      {
-        id: 1,
-        title: "The Avengers: Endgame",
-        description: "Epic conclusion to the Infinity Saga",
-        duration: 180,
-        rating: 9.5,
-        posterUrl: "https://via.placeholder.com/300x450/1a365d/ffffff?text=Avengers",
-        trailerUrl: "https://www.youtube.com/watch?v=TcMBFSGVi1c",
-        status: "playing",
-        releaseDate: "2025-11-01"
-      },
-      {
-        id: 2,
-        title: "Spider-Man: No Way Home",
-        description: "Peter Parker seeks help from Doctor Strange",
-        duration: 148,
-        rating: 8.9,
-        posterUrl: "https://via.placeholder.com/300x450/1a365d/ffffff?text=Spider-Man",
-        trailerUrl: "https://www.youtube.com/watch?v=JfVOs4VSpmA",
-        status: "playing",
-        releaseDate: "2025-11-15"
-      },
-      {
-        id: 3,
-        title: "Black Panther: Wakanda Forever",
-        description: "The people of Wakanda fight to protect their home",
-        duration: 161,
-        rating: 8.7,
-        posterUrl: "https://via.placeholder.com/300x450/1a365d/ffffff?text=Black+Panther",
-        trailerUrl: "https://www.youtube.com/watch?v=_Z3QKkl1WyM",
-        status: "upcoming",
-        releaseDate: "2025-12-01"
+    const fetchMovies = async () => {
+      try {
+        setIsLoading(true)
+        const data = await moviesAPI.nowShowing()
+        setMovies(data)
+      } catch (err) {
+        console.error("Error fetching now showing movies:", err)
+        // Fallback mock data
+        const mockMovies: Movie[] = [
+          {
+            id: 1,
+            title: "The Avengers: Endgame",
+            description: "Epic conclusion to the Infinity Saga",
+            duration: 180,
+            rating: 9.5,
+            posterUrl: "https://via.placeholder.com/300x450/1a365d/ffffff?text=Avengers",
+            trailerUrl: "https://www.youtube.com/watch?v=TcMBFSGVi1c",
+            status: "playing",
+            releaseDate: "2025-11-01"
+          },
+          {
+            id: 2,
+            title: "Spider-Man: No Way Home",
+            description: "Peter Parker seeks help from Doctor Strange",
+            duration: 148,
+            rating: 8.9,
+            posterUrl: "https://via.placeholder.com/300x450/1a365d/ffffff?text=Spider-Man",
+            trailerUrl: "https://www.youtube.com/watch?v=JfVOs4VSpmA",
+            status: "playing",
+            releaseDate: "2025-11-15"
+          },
+          {
+            id: 3,
+            title: "Black Panther: Wakanda Forever",
+            description: "The people of Wakanda fight to protect their home",
+            duration: 161,
+            rating: 8.7,
+            posterUrl: "https://via.placeholder.com/300x450/1a365d/ffffff?text=Black+Panther",
+            trailerUrl: "https://www.youtube.com/watch?v=_Z3QKkl1WyM",
+            status: "upcoming",
+            releaseDate: "2025-12-01"
+          }
+        ]
+        setMovies(mockMovies)
+      } finally {
+        setIsLoading(false)
       }
-    ]
-
-    setMovies(mockMovies)
-    setIsLoading(false)
+    }
+    fetchMovies()
   }, [])
 
   const nowShowingMovies = movies.filter((m) => m.status === "playing")
@@ -135,7 +146,7 @@ const Home = () => {
           <>
             <section className="movie-section">
               <div className="section-header">
-                <h2>PHIM ĐANG CHIẾU</h2>
+                <h2 className="text-title">PHIM ĐANG CHIẾU</h2>
                 <button className="view-all">Xem tất cả</button>
               </div>
               <MovieList movies={nowShowingMovies} />
@@ -143,7 +154,7 @@ const Home = () => {
 
             <section className="movie-section">
               <div className="section-header">
-                <h2>PHIM SẮP CHIẾU</h2>
+                <h2 className="text-title">PHIM SẮP CHIẾU</h2>
                 <button className="view-all">Xem tất cả</button>
               </div>
               <MovieList movies={upcomingMovies} />

@@ -4,6 +4,7 @@ import { useParams, useNavigate } from "react-router-dom"
 import { useState, useEffect } from "react"
 import Header from "../components/Header"
 import Footer from "../components/Footer"
+import "./booking.css"
 import { useMovieState } from "../hooks/useMovieState"
 import { moviesAPI, showtimesAPI, reservationsAPI } from "../services/api"
 import type { Showtime, Seat } from "../types"
@@ -51,8 +52,14 @@ const Booking = () => {
     const fetchSeats = async () => {
       if (!selectedShowtime) return
       try {
-        const seats = await showtimesAPI.seats(selectedShowtime.id)
-        setSeatMap(seats)
+        // Fetch seats - backend structure not yet defined, using mock for now
+        const mockSeats: Seat[] = [
+          { row: "A", number: 1, status: "available" },
+          { row: "A", number: 2, status: "available" },
+          { row: "A", number: 3, status: "sold" },
+          { row: "B", number: 1, status: "available" },
+        ]
+        setSeatMap(mockSeats)
       } catch (err) {
         setError(err instanceof Error ? err.message : "Failed to load seats")
       }
@@ -92,7 +99,15 @@ const Booking = () => {
     try {
       setIsLoading(true)
       const reservation = await reservationsAPI.create(selectedShowtime.id, selectedSeats)
+      if (!reservation) {
+        setError("Failed to create reservation")
+        return
+      }
       const booking = await reservationsAPI.confirm(reservation.reservationId, "credit_card")
+      if (!booking) {
+        setError("Failed to confirm booking")
+        return
+      }
       alert(`Booking confirmed! Booking ID: ${booking.bookingId}`)
       navigate("/")
     } catch (err) {
